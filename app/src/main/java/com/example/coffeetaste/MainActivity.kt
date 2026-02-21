@@ -12,38 +12,33 @@ import androidx.compose.ui.Modifier
 import com.example.coffeetaste.ui.CoffeTasteApp
 import com.example.coffeetaste.ui.theme.CoffeetasteTheme
 
+/**
+ * Main Activity. Entry point for the Coffee Taste app.
+ * Uses edge-to-edge, Material 3 theme, and Compose for UI.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 1) Enables edge-to-edge content (your UI can draw behind status/nav bars)
 
+        // Enable edge-to-edge so UI can draw behind status and navigation bars.
         enableEdgeToEdge()
-        // 2) This is the "Compose world" entry point for your UI
-
 
         setContent {
-            // 3) App theme wrapper (light/dark mode, typography, colors, shapes)
             CoffeetasteTheme {
-                //surface gives your app a proper and consistent UI theme background
+                // Surface provides a consistent theme background.
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
-                )
-                {
-                    // 5) Scaffold is the standard layout container:
-                    //    it will later host top bar, bottom bar, snackbars, etc.
+                ) {
+                    // Scaffold hosts top bar, bottom bar, snackbars, and content.
                     Scaffold(
                         modifier = Modifier.fillMaxSize()
                     ) { paddingValues ->
-                        // 6) Your app root composable:
-                        //    this is where NavigationHost + screens will live.
-
+                        // Root composable: NavHost and screen graphs go here.
                         CoffeTasteApp(
                             paddingValues = paddingValues
                         )
-
                     }
-
                 }
             }
         }
