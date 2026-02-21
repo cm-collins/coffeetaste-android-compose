@@ -1,3 +1,20 @@
 package com.example.coffeetaste.feature.home.presentation.home
 
-// Define UI state, UI events, and one-shot effects for the Home screen.
+/**
+ * Home screen contract: state, user events, and one-shot effects.
+ */
+object HomeContract {
+
+    data class State(
+        val isLoading: Boolean = false,
+        val message: String = ""
+    )
+
+    sealed interface Event {
+        data object Refresh : Event
+    }
+
+    sealed interface Effect {
+        data class ShowMessage(val text: String) : Effect
+    }
+}

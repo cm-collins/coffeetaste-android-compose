@@ -4,44 +4,44 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
+import com.example.coffeetaste.core.navigation.RootNavHost
 
 /**
- * Main Activity. Entry point for the Coffee Taste app.
- * Uses edge-to-edge, Material 3 theme, and Compose for UI.
+ * Entry point. Hosts the root NavHost (Splash → Auth host → Main host).
+ * Each feature host uses its own rememberNavController and graph.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Enable edge-to-edge so UI can draw behind status and navigation bars.
         enableEdgeToEdge()
 
         setContent {
             CoffeeTasteTheme {
-                // Surface provides a consistent theme background.
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Scaffold hosts top bar, bottom bar, snackbars, and content.
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize()
-                    ) { paddingValues ->
-                        // Root composable: NavHost and screen graphs go here.
-                        CoffeeTasteApp(
-                            paddingValues = paddingValues
-                        )
+                    Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(paddingValues)
+                        ) {
+                            RootNavHost(navController = rememberNavController())
+                        }
                     }
                 }
             }
         }
     }
 }
-
-
