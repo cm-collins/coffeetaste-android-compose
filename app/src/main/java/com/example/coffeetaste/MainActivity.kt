@@ -9,8 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.coffeetaste.ui.CoffeTasteApp
-import com.example.coffeetaste.ui.theme.CoffeetasteTheme
+import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
 
 /**
  * Main Activity. Entry point for the Coffee Taste app.
@@ -24,7 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            CoffeetasteTheme {
+            CoffeeTasteTheme {
                 // Surface provides a consistent theme background.
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -35,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize()
                     ) { paddingValues ->
                         // Root composable: NavHost and screen graphs go here.
-                        CoffeTasteApp(
+                        CoffeeTasteApp(
                             paddingValues = paddingValues
                         )
                     }
