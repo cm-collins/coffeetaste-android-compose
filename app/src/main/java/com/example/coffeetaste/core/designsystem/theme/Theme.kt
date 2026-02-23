@@ -25,9 +25,6 @@ fun CoffeeTasteTheme(
         else -> CoffeeTasteLightColorScheme
     }
 
-    // Custom tokens to match your UI behavior:
-    // - Light selected chip = brown
-    // - Dark selected chip = gold
     val extraColors = if (darkTheme) {
         CoffeeTasteExtraColors(
             chipSelected = colorScheme.secondary,
@@ -35,7 +32,11 @@ fun CoffeeTasteTheme(
             chipUnselected = colorScheme.surfaceVariant,
             chipUnselectedContent = colorScheme.onSurfaceVariant,
             scrim = Color.Black.copy(alpha = 0.55f),
-            glassSurface = Color.White.copy(alpha = 0.06f)
+            glassSurface = Color.White.copy(alpha = 0.06f),
+            onImageContent = Color.White,
+            ctaButtonBackground = colorScheme.primary,
+            ctaButtonIconSection = colorScheme.primary,
+            onCtaButton = colorScheme.onPrimary
         )
     } else {
         CoffeeTasteExtraColors(
@@ -43,8 +44,12 @@ fun CoffeeTasteTheme(
             chipSelectedContent = colorScheme.onPrimary,
             chipUnselected = colorScheme.surfaceVariant,
             chipUnselectedContent = colorScheme.onSurfaceVariant,
-            scrim = Color.Black.copy(alpha = 0.15f),
-            glassSurface = Color.Black.copy(alpha = 0.03f)
+            scrim = Color.Black.copy(alpha = 0.28f),
+            glassSurface = Color.Black.copy(alpha = 0.03f),
+            onImageContent = Color(0xFF1C1B1A),
+            ctaButtonBackground = colorScheme.primary,
+            ctaButtonIconSection = colorScheme.secondary,
+            onCtaButton = colorScheme.onPrimary
         )
     }
 

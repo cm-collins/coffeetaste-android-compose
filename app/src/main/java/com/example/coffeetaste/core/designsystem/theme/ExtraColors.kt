@@ -7,10 +7,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.MaterialTheme
 
 /**
- * Custom color palette for CoffeeTaste that extends beyond the standard Material3 Scheme.
+ * Extra colors for CoffeeTaste beyond Material 3.
  *
- * @Immutable: Tells the Compose compiler these values won't change after creation,
- * allowing for better performance during recompositions.
+ * **onImageContent:** Text/icon color on full-bleed hero images (e.g. Get Started). White in dark theme, dark in light for contrast.
+ *
+ * **ctaButtonBackground / ctaButtonIconSection / onCtaButton:** Primary CTA (e.g. Get Started). Dark theme: single block (icon section = background). Light theme: two-tone (icon section = gold).
  */
 @Immutable
 data class CoffeeTasteExtraColors(
@@ -18,41 +19,32 @@ data class CoffeeTasteExtraColors(
     val chipSelectedContent: Color,
     val chipUnselected: Color,
     val chipUnselectedContent: Color,
-    val scrim: Color,         // Used for dark overlays on images to make text readable
-    val glassSurface: Color   // Used for translucent "frosted glass" effects on cards/fields
+    val scrim: Color,
+    val glassSurface: Color,
+    val onImageContent: Color,
+    val ctaButtonBackground: Color,
+    val ctaButtonIconSection: Color,
+    val onCtaButton: Color
 )
 
-/**
- * CompositionLocal is a tool for passing data down through the UI tree implicitly.
- * This "key" allows us to access our custom colors anywhere in the app without
- * passing them as parameters to every single Composable function.
- */
 val LocalCoffeeTasteExtraColors = staticCompositionLocalOf {
-    // Default values are "Unspecified". These are used if you forget to
-    // provide the actual colors in your Theme.kt file.
     CoffeeTasteExtraColors(
         chipSelected = Color.Unspecified,
         chipSelectedContent = Color.Unspecified,
         chipUnselected = Color.Unspecified,
         chipUnselectedContent = Color.Unspecified,
         scrim = Color.Unspecified,
-        glassSurface = Color.Unspecified
+        glassSurface = Color.Unspecified,
+        onImageContent = Color.Unspecified,
+        ctaButtonBackground = Color.Unspecified,
+        ctaButtonIconSection = Color.Unspecified,
+        onCtaButton = Color.Unspecified
     )
 }
 
-/**
- * A central entry point for the app's design system.
- * Use this object instead of 'MaterialTheme' to access both standard and custom colors.
- *
- * Usage: CoffeeTasteTheme.extra.scrim OR CoffeeTasteTheme.colors.primary
- */
 object CoffeeTasteTheme {
-
-    // Retrieves the custom colors provided by the nearest CompositionLocalProvider
     val extra: CoffeeTasteExtraColors
         @Composable get() = LocalCoffeeTasteExtraColors.current
-
-    // Convenience property to access standard Material3 colors via our custom object
     val colors
         @Composable get() = MaterialTheme.colorScheme
 }
