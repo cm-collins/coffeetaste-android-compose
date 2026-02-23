@@ -14,5 +14,16 @@
 
     <!-- Auth -->
     <string name="sign_up_title">Sign Up</string>
-    <string name="sign_up_subtitle">Let\'s Create Your Account</string>
+    <string name="sign_up_subtitle">Let\'s create you an account.</string>
+    <string name="sign_in_title">Sign In</string>
+
+    <!-- Form labels -->
+    <string name="label_email">EMAIL</string>
+    <string name="label_password">PASSWORD</string>
+    <string name="label_re_password">RE-PASSWORD</string>
+    <string name="hint_email">example@email.com</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="sign_in_link">Sign In</string>
+    <string name="sign_up_cta">Sign Up</string>
 </resources>
