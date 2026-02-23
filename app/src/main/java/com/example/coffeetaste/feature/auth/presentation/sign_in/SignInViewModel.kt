@@ -11,7 +11,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
- * Sign In screen ViewModel: holds state, handles events, emits effects.
+ * Sign In screen ViewModel.
+ *
+ * **State:** [_state] is writable; [state] is read-only StateFlow. Holds email, password, isLoading, errorMessage.
+ *
+ * **Effects:** [_effect] is a Channel for one-shot navigation. [effect] is collected by the host (NavigateToSignUp or NavigateToMain).
+ *
+ * **onEvent:** Field changes update state and clear error. SignInClicked sets loading, then sends NavigateToMain (TODO: call sign-in use case). SignUpClicked sends NavigateToSignUp.
  */
 class SignInViewModel : ViewModel() {
 
@@ -31,7 +37,6 @@ class SignInViewModel : ViewModel() {
             }
             SignInContract.Event.SignInClicked -> viewModelScope.launch {
                 _state.update { it.copy(isLoading = true, errorMessage = null) }
-                // TODO: Call sign-in use case / repository, then:
                 _effect.send(SignInContract.Effect.NavigateToMain)
                 _state.update { it.copy(isLoading = false) }
             }

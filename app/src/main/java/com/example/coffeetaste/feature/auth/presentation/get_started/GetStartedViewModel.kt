@@ -10,7 +10,13 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 /**
- * Get Started screen ViewModel: holds state and emits effects for navigation.
+ * Get Started screen ViewModel.
+ *
+ * **State:** [_state] is writable; [state] is read-only StateFlow for the UI. asStateFlow() keeps the Screen from writing.
+ *
+ * **Effects:** [_effect] is a Channel for one-shot navigation. [effect] is the Flow the host collects; it navigates to Sign In or Sign Up based on the effect.
+ *
+ * **onEvent:** SignInClicked / SignUpClicked send the corresponding effect. No async work; navigation is handled by the host.
  */
 class GetStartedViewModel : ViewModel() {
 

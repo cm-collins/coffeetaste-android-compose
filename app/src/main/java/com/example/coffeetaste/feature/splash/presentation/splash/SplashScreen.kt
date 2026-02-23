@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coffeetaste.R
 
@@ -50,10 +49,4 @@ fun SplashScreen(
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.75f)
         )
     }
-}
-
-@Preview
-@Composable
-fun SplashScreenPreview() {
-    SplashScreen(state = SplashContract.State())
 }

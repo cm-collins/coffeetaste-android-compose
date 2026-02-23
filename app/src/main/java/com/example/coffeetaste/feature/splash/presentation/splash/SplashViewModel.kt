@@ -11,7 +11,17 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 /**
- * Splash screen ViewModel: holds state and emits NavigateAway after delay.
+ * Splash screen ViewModel.
+ *
+ * **State:** [_state] is the writable holder; [state] is exposed as read-only StateFlow so the
+ * UI can collect it and recompose when it changes. asStateFlow() keeps the Screen from writing.
+ *
+ * **Effects:** [_effect] is a Channel for one-shot events (e.g. NavigateAway). BUFFERED means
+ * values are buffered if the collector is slow. [effect] is the Flow the host collects in
+ * LaunchedEffect; when it receives NavigateAway it calls onFinish() and the root navigates to Auth.
+ *
+ * **Init:** Launches a coroutine in viewModelScope (cancels when ViewModel is cleared). After
+ * a short delay the splash is visible, then we send NavigateAway and set isLoading = false.
  */
 class SplashViewModel : ViewModel() {
 

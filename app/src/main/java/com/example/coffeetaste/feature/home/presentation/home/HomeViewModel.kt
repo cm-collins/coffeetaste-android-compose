@@ -11,7 +11,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
- * Home screen ViewModel: holds state, handles events, emits effects.
+ * Home screen ViewModel.
+ *
+ * **State:** [_state] is writable; [state] is read-only StateFlow. Holds isLoading and message (or future list data).
+ *
+ * **Effects:** [_effect] is a Channel for one-shot feedback (e.g. ShowMessage). [effect] can be collected by the host or Screen for toasts/snackbars.
+ *
+ * **onEvent:** Refresh sets loading, then clears it (TODO: load home data and update state or emit effects).
  */
 class HomeViewModel : ViewModel() {
 
@@ -25,7 +31,6 @@ class HomeViewModel : ViewModel() {
         when (event) {
             HomeContract.Event.Refresh -> viewModelScope.launch {
                 _state.update { it.copy(isLoading = true) }
-                // TODO: Load home data
                 _state.update { it.copy(isLoading = false) }
             }
         }

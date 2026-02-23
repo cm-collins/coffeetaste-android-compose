@@ -1,7 +1,13 @@
 package com.example.coffeetaste.feature.auth.presentation.sign_in
 
 /**
- * Sign In screen contract: state, user events, and one-shot effects.
+ * Sign In screen contract.
+ *
+ * **State:** Form fields (email, password), loading flag, and optional error message. The Screen binds to these.
+ *
+ * **Event:** User actions (field changes, SignInClicked, SignUpClicked). The Screen sends these; ViewModel updates state or emits effects.
+ *
+ * **Effect:** One-shot navigation. NavigateToSignUp for "Go to Sign Up"; NavigateToMain when sign-in succeeds. The host collects and navigates.
  */
 object SignInContract {
 
