@@ -9,9 +9,19 @@ import androidx.compose.material3.MaterialTheme
 /**
  * Extra colors for CoffeeTaste beyond Material 3.
  *
- * **onImageContent:** Text/icon color on full-bleed hero images (e.g. Get Started). White in dark theme, dark in light for contrast.
+ * **Hero text colors (used on Get Started and similar screens):**
+ * - `heroTitle`: Brand title color (e.g. "COFFEE TASTE!")
+ * - `heroHeadline`: Main headline (e.g. "Find your favorite")
+ * - `heroAccent`: Accent text like styled "Coffee Taste!" tagline
+ * - `heroSubtitle`: Subtitle/description text
  *
- * **ctaButtonBackground / ctaButtonIconSection / onCtaButton:** Primary CTA (e.g. Get Started). Dark theme: single block (icon section = background). Light theme: two-tone (icon section = gold).
+ * **CTA button:**
+ * - Light theme: two-tone (brown body + gold icon section)
+ * - Dark theme: single-tone (same color for body and icon section)
+ *
+ * **Utility colors:**
+ * - `scrim`: Overlay for modals/sheets
+ * - `glassSurface`: Frosted glass effect surfaces
  */
 @Immutable
 data class CoffeeTasteExtraColors(
@@ -21,7 +31,10 @@ data class CoffeeTasteExtraColors(
     val chipUnselectedContent: Color,
     val scrim: Color,
     val glassSurface: Color,
-    val onImageContent: Color,
+    val heroTitle: Color,
+    val heroHeadline: Color,
+    val heroAccent: Color,
+    val heroSubtitle: Color,
     val ctaButtonBackground: Color,
     val ctaButtonIconSection: Color,
     val onCtaButton: Color
@@ -35,7 +48,10 @@ val LocalCoffeeTasteExtraColors = staticCompositionLocalOf {
         chipUnselectedContent = Color.Unspecified,
         scrim = Color.Unspecified,
         glassSurface = Color.Unspecified,
-        onImageContent = Color.Unspecified,
+        heroTitle = Color.Unspecified,
+        heroHeadline = Color.Unspecified,
+        heroAccent = Color.Unspecified,
+        heroSubtitle = Color.Unspecified,
         ctaButtonBackground = Color.Unspecified,
         ctaButtonIconSection = Color.Unspecified,
         onCtaButton = Color.Unspecified

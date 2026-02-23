@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun CoffeeTasteTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // keep false so your brand colors always show
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -26,6 +26,7 @@ fun CoffeeTasteTheme(
     }
 
     val extraColors = if (darkTheme) {
+        // Dark theme: light text on dark/image background, single-tone CTA button
         CoffeeTasteExtraColors(
             chipSelected = colorScheme.secondary,
             chipSelectedContent = colorScheme.onSecondary,
@@ -33,23 +34,30 @@ fun CoffeeTasteTheme(
             chipUnselectedContent = colorScheme.onSurfaceVariant,
             scrim = Color.Black.copy(alpha = 0.55f),
             glassSurface = Color.White.copy(alpha = 0.06f),
-            onImageContent = Color.White,
-            ctaButtonBackground = colorScheme.primary,
-            ctaButtonIconSection = colorScheme.primary,
-            onCtaButton = colorScheme.onPrimary
+            heroTitle = Color.White,
+            heroHeadline = Color.White,
+            heroAccent = CoffeeGold,
+            heroSubtitle = Color.White.copy(alpha = 0.85f),
+            ctaButtonBackground = CoffeeBrownDark,
+            ctaButtonIconSection = CoffeeBrownDark,
+            onCtaButton = Color.White
         )
     } else {
+        // Light theme: dark text on light background, two-tone CTA button
         CoffeeTasteExtraColors(
             chipSelected = colorScheme.primary,
             chipSelectedContent = colorScheme.onPrimary,
             chipUnselected = colorScheme.surfaceVariant,
             chipUnselectedContent = colorScheme.onSurfaceVariant,
-            scrim = Color.Black.copy(alpha = 0.28f),
+            scrim = Color.Black.copy(alpha = 0.15f),
             glassSurface = Color.Black.copy(alpha = 0.03f),
-            onImageContent = Color(0xFF1C1B1A),
-            ctaButtonBackground = colorScheme.primary,
-            ctaButtonIconSection = colorScheme.secondary,
-            onCtaButton = colorScheme.onPrimary
+            heroTitle = CoffeeBrown,
+            heroHeadline = Color(0xFF1C1B1A),
+            heroAccent = CoffeeGold,
+            heroSubtitle = Color(0xFF6B5D56),
+            ctaButtonBackground = CoffeeBrown,
+            ctaButtonIconSection = CoffeeGold,
+            onCtaButton = Color.White
         )
     }
 
