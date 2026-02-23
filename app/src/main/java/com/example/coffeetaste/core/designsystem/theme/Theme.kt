@@ -61,7 +61,10 @@ fun CoffeeTasteTheme(
         )
     }
 
-    CompositionLocalProvider(LocalCoffeeTasteExtraColors provides extraColors) {
+    CompositionLocalProvider(
+        LocalCoffeeTasteExtraColors provides extraColors,
+        LocalCoffeeTasteIsDark provides darkTheme
+    ) {
         MaterialTheme(
             colorScheme = colorScheme,
             typography = CoffeeTasteTypography,

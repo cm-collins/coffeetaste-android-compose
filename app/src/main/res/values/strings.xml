@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">coffetaste</string>
+
+    <!-- Brand -->
+    <string name="brand_title_upper">COFFEE TASTE!</string>
+    <string name="cd_coffee_taste_logo">CoffeeTaste logo</string>
+
+    <!-- Get Started -->
+    <string name="get_started_cta">Get Started</string>
+    <string name="get_started_headline">Find your favorite</string>
+    <string name="get_started_accent">Coffee Taste!</string>
+    <string name="get_started_subtitle_line_1">We\'re coffee shop, beer and wine bar,</string>
+    <string name="get_started_subtitle_line_2">&amp; event space for performing arts</string>
+
+    <!-- Auth -->
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_up_subtitle">Let\'s Create Your Account</string>
 </resources>

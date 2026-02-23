@@ -1,90 +1,105 @@
 package com.example.coffeetaste.feature.auth.presentation.sign_up
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.coffeetaste.R
+import com.example.coffeetaste.core.designsystem.components.BrandHeader
+import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 
 /**
- * Sign Up screen (View). Binds state to UI and sends events to ViewModel.
+ * Sign Up screen.
  */
 @Composable
 fun SignUpScreen(
-    state: SignUpContract.State,
-    onEvent: (SignUpContract.Event) -> Unit
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Sign Up",
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground
+    SignUpContent(
+        isDarkTheme = CoffeeTasteTheme.isDark
+    )
+}
+
+@Composable
+private fun SignUpContent(
+    isDarkTheme: Boolean
+) {
+    if (isDarkTheme) SignUpDarkContent() else SignUpLightContent()
+}
+
+@Composable
+private fun SignUpDarkContent() {
+    val extra = CoffeeTasteTheme.extra
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(R.drawable.get_started_bg),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.height(24.dp))
-        OutlinedTextField(
-            value = state.email,
-            onValueChange = { onEvent(SignUpContract.Event.EmailChanged(it)) },
-            label = { Text("Email") },
-            singleLine = true
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(
-            value = state.password,
-            onValueChange = { onEvent(SignUpContract.Event.PasswordChanged(it)) },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            singleLine = true
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(
-            value = state.confirmPassword,
-            onValueChange = { onEvent(SignUpContract.Event.ConfirmPasswordChanged(it)) },
-            label = { Text("Confirm password") },
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            singleLine = true
-        )
-        state.errorMessage?.let { msg ->
-            Spacer(modifier = Modifier.height(8.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp, vertical = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            BrandHeader(titleColor = extra.heroTitle)
+            Spacer(modifier = Modifier.height(40.dp))
+
             Text(
-                text = msg,
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall
+                text = stringResource(R.string.sign_up_title),
+                style = MaterialTheme.typography.headlineLarge,
+                color = extra.heroHeadline
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = stringResource(R.string.sign_up_subtitle),
+                style = MaterialTheme.typography.bodyMedium,
+                color = extra.heroSubtitle
             )
         }
+    }
+}
+
+@Composable
+private fun SignUpLightContent() {
+    val extra = CoffeeTasteTheme.extra
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 24.dp, vertical = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = { onEvent(SignUpContract.Event.SignUpClicked) },
-            enabled = !state.isLoading
-        ) {
-            if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.height(24.dp))
-            } else {
-                Text("Sign Up")
-            }
-        }
-        Spacer(modifier = Modifier.height(12.dp))
-        Button(
-            onClick = { onEvent(SignUpContract.Event.SignInClicked) }
-        ) {
-            Text("Go to Sign In")
-        }
+        BrandHeader(titleColor = extra.heroTitle)
+        Spacer(modifier = Modifier.height(48.dp))
+
+        Text(
+            text = stringResource(R.string.sign_up_title),
+            style = MaterialTheme.typography.headlineLarge,
+            color = extra.heroHeadline
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = stringResource(R.string.sign_up_subtitle),
+            style = MaterialTheme.typography.bodyMedium,
+            color = extra.heroSubtitle
+        )
     }
 }

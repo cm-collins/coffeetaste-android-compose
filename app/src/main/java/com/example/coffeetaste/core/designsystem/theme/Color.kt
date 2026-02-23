@@ -6,9 +6,9 @@ import androidx.compose.ui.graphics.Color
 
 // --- BRAND COLORS ---
 // Core identity colors used consistently across light and dark themes
-val CoffeeBrown = Color(0xFF55433C)       // Primary brand color (buttons, active states)
-val CoffeeGold = Color(0xFFA97C37)        // Accent color (icons, highlights, stars)
-val CoffeeBrownDark = Color(0xFF3D302B)   // Darker brown for dark theme buttons
+internal val CoffeeBrown = Color(0xFF55433C)       // Primary brand color (buttons, active states)
+internal val CoffeeGold = Color(0xFFA97C37)        // Accent color (icons, highlights, stars)
+internal val CoffeeBrownDark = Color(0xFF3D302B)   // Darker brown for dark theme buttons
 
 // --- LIGHT MODE NEUTRALS ---
 private val LightBackground = Color(0xFFFFFFFF)     // Pure white background (matches design)

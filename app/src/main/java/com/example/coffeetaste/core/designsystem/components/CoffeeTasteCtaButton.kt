@@ -1,4 +1,4 @@
-package com.example.coffeetaste.core.designsystem.components.getstarted
+package com.example.coffeetaste.core.designsystem.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,11 +23,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
 
-/**
- * Full-width CTA button for Get Started. Uses design system colors: dark theme = single block, light theme = two-tone (text area + gold icon area).
- */
 @Composable
-fun GetStartedCtaButton(
+fun CoffeeTasteCtaButton(
+    text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -55,7 +53,7 @@ fun GetStartedCtaButton(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Get Started",
+                text = text,
                 style = MaterialTheme.typography.bodyLarge,
                 color = extra.onCtaButton
             )
@@ -69,10 +67,11 @@ fun GetStartedCtaButton(
         ) {
             Icon(
                 imageVector = Icons.Filled.ArrowForward,
-                contentDescription = "Arrow right",
+                contentDescription = null,
                 modifier = Modifier.size(24.dp),
                 tint = extra.onCtaButton
             )
         }
     }
 }
+

@@ -63,4 +63,6 @@ object CoffeeTasteTheme {
         @Composable get() = LocalCoffeeTasteExtraColors.current
     val colors
         @Composable get() = MaterialTheme.colorScheme
+    val isDark: Boolean
+        @Composable get() = LocalCoffeeTasteIsDark.current
 }

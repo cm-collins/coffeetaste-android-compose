@@ -73,7 +73,7 @@ fun AuthHost(
                     }
                 }
             }
-            SignUpScreen(state = state, onEvent = viewModel::onEvent)
+            SignUpScreen()
         }
     }
 }
