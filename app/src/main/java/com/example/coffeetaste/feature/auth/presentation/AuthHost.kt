@@ -68,12 +68,18 @@ fun AuthHost(
                 viewModel.effect.collect { effect ->
                     when (effect) {
                         SignUpContract.Effect.NavigateToSignIn ->
-                            navController.popBackStack()
+                            navController.navigate(Route.SIGN_IN) {
+                                popUpTo(Route.SIGN_UP) { inclusive = true }
+                                launchSingleTop = true
+                            }
                         SignUpContract.Effect.NavigateToMain -> onAuthSuccess()
                     }
                 }
             }
-            SignUpScreen()
+            SignUpScreen(
+                state = state,
+                onEvent = viewModel::onEvent
+            )
         }
     }
 }

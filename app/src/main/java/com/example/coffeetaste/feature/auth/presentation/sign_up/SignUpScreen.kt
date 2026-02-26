@@ -20,9 +20,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,15 +41,15 @@ import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
 
 @Composable
 fun SignUpScreen(
-    onSignUpClick: () -> Unit = {},
-    onSignInClick: () -> Unit = {},
+    state: SignUpContract.State,
+    onEvent: (SignUpContract.Event) -> Unit,
     onForgotPasswordClick: () -> Unit = {}
 ) {
     SignUpContent(
         isDarkTheme = CoffeeTasteTheme.isDark,
         extra = CoffeeTasteTheme.extra,
-        onSignUpClick = onSignUpClick,
-        onSignInClick = onSignInClick,
+        state = state,
+        onEvent = onEvent,
         onForgotPasswordClick = onForgotPasswordClick
     )
 }
@@ -58,13 +58,10 @@ fun SignUpScreen(
 private fun SignUpContent(
     isDarkTheme: Boolean,
     extra: CoffeeTasteExtraColors,
-    onSignUpClick: () -> Unit,
-    onSignInClick: () -> Unit,
+    state: SignUpContract.State,
+    onEvent: (SignUpContract.Event) -> Unit,
     onForgotPasswordClick: () -> Unit
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var rePassword by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var rePasswordVisible by remember { mutableStateOf(false) }
 
@@ -115,12 +112,8 @@ private fun SignUpContent(
 
                 // Form fields
                 SignUpFormFields(
-                    email = email,
-                    onEmailChange = { email = it },
-                    password = password,
-                    onPasswordChange = { password = it },
-                    rePassword = rePassword,
-                    onRePasswordChange = { rePassword = it },
+                    state = state,
+                    onEvent = onEvent,
                     passwordVisible = passwordVisible,
                     onPasswordVisibilityToggle = { passwordVisible = !passwordVisible },
                     rePasswordVisible = rePasswordVisible,
@@ -147,7 +140,7 @@ private fun SignUpContent(
                 // Sign Up Button
                 CoffeeTasteCtaButton(
                     text = stringResource(R.string.sign_up_cta),
-                    onClick = onSignUpClick,
+                    onClick = { onEvent(SignUpContract.Event.SignUpClicked) },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -157,7 +150,7 @@ private fun SignUpContent(
                 SignUpFooter(
                     textColor = extra.heroSubtitle,
                     linkColor = extra.heroAccent,
-                    onSignInClick = onSignInClick
+                    onSignInClick = { onEvent(SignUpContract.Event.SignInClicked) }
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -215,12 +208,8 @@ private fun SignUpContent(
 
                 // Form fields
                 SignUpFormFields(
-                    email = email,
-                    onEmailChange = { email = it },
-                    password = password,
-                    onPasswordChange = { password = it },
-                    rePassword = rePassword,
-                    onRePasswordChange = { rePassword = it },
+                    state = state,
+                    onEvent = onEvent,
                     passwordVisible = passwordVisible,
                     onPasswordVisibilityToggle = { passwordVisible = !passwordVisible },
                     rePasswordVisible = rePasswordVisible,
@@ -247,7 +236,7 @@ private fun SignUpContent(
                 // Sign Up Button
                 CoffeeTasteCtaButton(
                     text = stringResource(R.string.sign_up_cta),
-                    onClick = onSignUpClick,
+                    onClick = { onEvent(SignUpContract.Event.SignUpClicked) },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -257,7 +246,7 @@ private fun SignUpContent(
                 SignUpFooter(
                     textColor = colors.onSurfaceVariant,
                     linkColor = colors.primary,
-                    onSignInClick = onSignInClick
+                    onSignInClick = { onEvent(SignUpContract.Event.SignInClicked) }
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -268,12 +257,8 @@ private fun SignUpContent(
 
 @Composable
 private fun SignUpFormFields(
-    email: String,
-    onEmailChange: (String) -> Unit,
-    password: String,
-    onPasswordChange: (String) -> Unit,
-    rePassword: String,
-    onRePasswordChange: (String) -> Unit,
+    state: SignUpContract.State,
+    onEvent: (SignUpContract.Event) -> Unit,
     passwordVisible: Boolean,
     onPasswordVisibilityToggle: () -> Unit,
     rePasswordVisible: Boolean,
@@ -281,8 +266,8 @@ private fun SignUpFormFields(
 ) {
     // Email Field
     CoffeeTasteTextField(
-        value = email,
-        onValueChange = onEmailChange,
+        value = state.email,
+        onValueChange = { onEvent(SignUpContract.Event.EmailChanged(it)) },
         label = stringResource(R.string.label_email),
         placeholder = stringResource(R.string.hint_email),
         leadingIcon = painterResource(R.drawable.email),
@@ -294,8 +279,8 @@ private fun SignUpFormFields(
 
     // Password Field
     CoffeeTasteTextField(
-        value = password,
-        onValueChange = onPasswordChange,
+        value = state.password,
+        onValueChange = { onEvent(SignUpContract.Event.PasswordChanged(it)) },
         label = stringResource(R.string.label_password),
         leadingIcon = painterResource(R.drawable.password_dot),
         trailingIcon = painterResource(
@@ -312,8 +297,8 @@ private fun SignUpFormFields(
 
     // Re-Password Field
     CoffeeTasteTextField(
-        value = rePassword,
-        onValueChange = onRePasswordChange,
+        value = state.confirmPassword,
+        onValueChange = { onEvent(SignUpContract.Event.ConfirmPasswordChanged(it)) },
         label = stringResource(R.string.label_re_password),
         leadingIcon = painterResource(R.drawable.password_dot),
         trailingIcon = painterResource(
