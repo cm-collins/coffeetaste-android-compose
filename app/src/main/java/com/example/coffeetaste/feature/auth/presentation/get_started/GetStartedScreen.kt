@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 import com.example.coffeetaste.R
 import androidx.compose.material3.Text
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.coffeetaste.core.designsystem.components.BrandHeader
 import com.example.coffeetaste.core.designsystem.components.CoffeeTasteCtaButton
 import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
@@ -154,4 +155,26 @@ private fun HeroTextContent(
         color = extra.heroSubtitle,
         textAlign = TextAlign.Center
     )
+}
+
+@Preview(name = "Get Started - Light", showBackground = true)
+@Composable
+fun GetStartedPreviewLight() {
+    CoffeeTasteTheme(darkTheme = false) {
+        GetStartedScreen(
+            state = GetStartedContract.State(),
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Get Started - Dark", showBackground = true)
+@Composable
+fun GetStartedPreviewDark() {
+    CoffeeTasteTheme(darkTheme = true) {
+        GetStartedScreen(
+            state = GetStartedContract.State(),
+            onEvent = {}
+        )
+    }
 }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coffeetaste.R
 import com.example.coffeetaste.core.designsystem.components.BrandHeader
@@ -342,5 +344,31 @@ private fun SignUpFooter(
                 onClick = onSignInClick
             )
         )
+    }
+}
+
+@Preview(name = "Sign Up - Light", showBackground = true)
+@Composable
+fun SignUpScreenPreviewLight() {
+    CoffeeTasteTheme(darkTheme = false) {
+        Surface {
+            SignUpScreen(
+                state = SignUpContract.State(),
+                onEvent = {}
+            )
+        }
+    }
+}
+
+@Preview(name = "Sign Up - Dark", showBackground = true)
+@Composable
+fun SignUpScreenPreviewDark() {
+    CoffeeTasteTheme(darkTheme = true) {
+        Surface {
+            SignUpScreen(
+                state = SignUpContract.State(),
+                onEvent = {}
+            )
+        }
     }
 }

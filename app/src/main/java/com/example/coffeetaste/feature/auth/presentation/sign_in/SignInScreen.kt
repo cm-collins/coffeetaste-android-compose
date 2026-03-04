@@ -10,13 +10,16 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.coffeetaste.core.designsystem.theme.CoffeeTasteTheme
 
 /**
  * Sign In screen (View). Binds state to UI and sends events to ViewModel.
@@ -76,6 +79,32 @@ fun SignInScreen(
             onClick = { onEvent(SignInContract.Event.SignUpClicked) }
         ) {
             Text("Go to Sign Up")
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Sign In - Light")
+@Composable
+fun SignInScreenPreviewLight() {
+    CoffeeTasteTheme(darkTheme = false) {
+        Surface {
+            SignInScreen(
+                state = SignInContract.State(),
+                onEvent = {}
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Sign In - Dark")
+@Composable
+fun SignInScreenPreviewDark() {
+    CoffeeTasteTheme(darkTheme = true) {
+        Surface {
+            SignInScreen(
+                state = SignInContract.State(),
+                onEvent = {}
+            )
         }
     }
 }
